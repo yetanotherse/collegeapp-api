@@ -12,7 +12,11 @@ const { collegeSchema } = require('./schema/college');
 const College = mongoose.model('College', collegeSchema);
 
 async function connect() {
-    await mongoose.connect(dbConnectionUri);
+    try {
+        await mongoose.connect(dbConnectionUri);
+    } catch(error) {
+        throw new Error(error);
+    }
 }
 
 module.exports = {
